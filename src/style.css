@@ -1,0 +1,183 @@
+body {
+    background-color: rgb(134, 134, 134);
+}
+
+.wrap {
+    border-radius: 15px 0 15px 15px;
+    margin: 0 auto;
+    margin-top: 100px;
+    width: 50%;
+    height: 700px;
+    background-color: rgb(150, 255, 245);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.or {
+    color: black;
+    font-size: large;
+    font-weight: 900;
+    cursor: none;
+}
+
+.wordsWrapper {
+    margin: 0 auto;
+    border-radius: 15px 0 15px 15px;
+    width: 80%;
+    height: 90px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid;
+    border-left-color: rgb(0, 128, 85);
+    border-top-color: rgb(171, 3, 171);
+    border-right-color: rgb(255, 0, 98);
+    border-bottom-color: rgb(255, 126, 61);
+}
+
+.vocabulary {
+    margin: 0 auto;
+    margin-top: 40px;
+    border-radius: 15px 0 15px 15px;
+    width: 77%;
+    height: 500px;
+    position: relative;
+    background-color: white;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 10px;
+    background-color: rgb(0, 0, 0);
+}
+
+.addWords,
+.startTraining,
+.addWord {
+    border: 2px solid;
+    border-color: white black black white;
+    width: 25%;
+    height: 25%;
+    border-radius: 10px;
+    background: linear-gradient(to right, rgb(230, 128, 255), rgb(119, 119, 247));
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.addWords:hover,
+.startTraining:hover {
+    opacity: 95%;
+}
+
+.addWords:active,
+.startTraining:active,
+.addWord:active,
+.del:active {
+    border-color: black white white black;
+}
+
+.addWordInput,
+.addTranslateInput {
+    text-align: center;
+    appearance: none;
+    border: none;
+    border-radius: 7px;
+    height: 60%;
+    width: 35%;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-size: large;
+    font-weight: 800;
+}
+
+.addWordInput:focus,
+.addTranslateInput:focus {
+    border: 2px solid;
+    outline: none;
+    border-left-color: rgb(0, 128, 85);
+    border-top-color: rgb(171, 3, 171);
+    border-right-color: rgb(255, 0, 98);
+    border-bottom-color: rgb(255, 126, 61);
+}
+
+.addWord {
+    border-color: rgb(214, 214, 214) black black rgb(214, 214, 214);
+    width: 20%;
+    height: 40%;
+}
+
+.vocElement {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 30px;
+    width: 98%;
+    border: 1px solid black;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.wordEng {
+    height: 70%;
+    padding-top: 5px;
+    min-width: 23%;
+    text-align: center;
+    font-weight: 900;
+    margin-left: 10px;
+}
+
+.dash {
+    font-size: large;
+    font-weight: 900;
+    padding: 0 10px 0 10px;
+}
+
+.wordTranslate {
+    font-weight: 900;
+    height: 70%;
+    min-width: 23%;
+    text-align: center;
+    padding-top: 5px;
+    margin-left: 10px;
+}
+
+.del {
+    position: absolute;
+    left: 90%;
+    height: 25px;
+    width: 25px;
+    border: 2px solid;
+    border-radius: 100%;
+    cursor: pointer;
+    background-color: rgb(255, 101, 116);
+    border-color: rgb(214, 214, 214) black black rgb(214, 214, 214);
+}
+
+.del:hover {
+    background-color: rgb(255, 49, 70);
+}
+
+.del:active {
+    background-color: rgb(254, 0, 25);
+}
+
+.rmvImg {
+    width: 99%;
+    height: 99%;
+}
+
+.wordNum{
+    position: absolute;
+    width: 25px;
+    height: 22px;
+    border: 1px solid black;
+    margin-left: 5px;
+    border-radius: 100%;
+    background-color: rgb(233, 233, 233);
+    font-weight: 900;
+    text-align: center;
+    padding-top: 3px;
+    cursor: pointer;
+}
