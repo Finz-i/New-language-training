@@ -1,5 +1,38 @@
+*{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 body {
     background-color: rgb(134, 134, 134);
+}
+
+.addWords:active,
+.startTraining:active,
+.addWord:active,
+.del:active,
+.backToPrevious:active {
+    border-color: black white white black;
+}
+
+.addWords,
+.startTraining,
+.addWord,
+.backToPrevious {
+    border: 2px solid;
+    border-color: white black black white;
+    width: 40%;
+    height: 30%;
+    border-radius: 10px;
+    background: linear-gradient(to right, rgb(230, 128, 255), rgb(119, 119, 247));
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.addWords:hover,
+.startTraining:hover,
+.backToPrevious:hover,
+.addWord:hover {
+    opacity: 90%;
 }
 
 .wrap {
@@ -8,11 +41,12 @@ body {
     margin-top: 100px;
     width: 50%;
     height: 700px;
-    background-color: rgb(150, 255, 245);
+    background-color: rgb(189, 210, 255);
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding-top: 20px;
+    position: relative;
 }
 
 .or {
@@ -40,9 +74,9 @@ body {
 
 .vocabulary {
     margin: 0 auto;
-    margin-top: 40px;
+    margin-top: 10px;
     border-radius: 15px 0 15px 15px;
-    width: 77%;
+    width: 77.5%;
     height: 500px;
     position: relative;
     background-color: white;
@@ -50,31 +84,6 @@ body {
     overflow-y: scroll;
     padding: 10px;
     background-color: rgb(0, 0, 0);
-}
-
-.addWords,
-.startTraining,
-.addWord {
-    border: 2px solid;
-    border-color: white black black white;
-    width: 25%;
-    height: 25%;
-    border-radius: 10px;
-    background: linear-gradient(to right, rgb(230, 128, 255), rgb(119, 119, 247));
-    font-weight: 900;
-    cursor: pointer;
-}
-
-.addWords:hover,
-.startTraining:hover {
-    opacity: 95%;
-}
-
-.addWords:active,
-.startTraining:active,
-.addWord:active,
-.del:active {
-    border-color: black white white black;
 }
 
 .addWordInput,
@@ -111,18 +120,20 @@ body {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    height: 30px;
+    min-height: 30px;
+    
     width: 98%;
     border: 1px solid black;
     margin-bottom: 5px;
     border-radius: 5px;
     background-color: white;
+    /* overflow-y: scroll; */
 }
 
 .wordEng {
-    height: 70%;
+    min-height: 70%;
     padding-top: 5px;
-    min-width: 23%;
+    width: 35%;
     text-align: center;
     font-weight: 900;
     margin-left: 10px;
@@ -136,8 +147,8 @@ body {
 
 .wordTranslate {
     font-weight: 900;
-    height: 70%;
-    min-width: 23%;
+    min-height: 70%;
+    width: 35%;
     text-align: center;
     padding-top: 5px;
     margin-left: 10px;
@@ -145,7 +156,7 @@ body {
 
 .del {
     position: absolute;
-    left: 90%;
+    left: 87.5%;
     height: 25px;
     width: 25px;
     border: 2px solid;
@@ -169,15 +180,34 @@ body {
 }
 
 .wordNum{
-    position: absolute;
-    width: 25px;
+    margin-left: 10%;
+    margin-top: 10px;
+    width: 57px;
     height: 22px;
     border: 1px solid black;
-    margin-left: 5px;
-    border-radius: 100%;
+    /* border-color: white black black white; */
+    border-radius: 7px 0 7px 7px;
     background-color: rgb(233, 233, 233);
     font-weight: 900;
-    text-align: center;
-    padding-top: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
+}
+
+.backToPrevious{
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    height: 33px;
+    width: 33px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.backImg{
+    height: 17px;
+    width: 17px;
 }

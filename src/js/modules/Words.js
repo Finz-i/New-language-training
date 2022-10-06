@@ -1,8 +1,22 @@
-
 let addWordsFunc = function () {
+
+    let mainButtonSound = new Audio;
+    mainButtonSound.src = './sounds/main-button.wav';
+
+    let delSound = new Audio;
+    delSound.src = '../../sounds/del.wav';
 
     const wrapper = document.querySelector('.wrapper');
     wrapper.classList.add('wrap');
+
+    const backToPrevious = document.createElement('button');
+    backToPrevious.classList.add('backToPrevious');
+    wrapper.appendChild(backToPrevious);
+    
+    let backImg = document.createElement('img');
+    backImg.classList.add('backImg');
+    backToPrevious.appendChild(backImg);
+    backImg.src = '../../remove.svg';
 
     const wordsWrapper = document.createElement('div');
     wordsWrapper.classList.add('wordsWrapper');
@@ -12,22 +26,32 @@ let addWordsFunc = function () {
     addWordInput.classList.add('addWordInput');
     wordsWrapper.appendChild(addWordInput);
     addWordInput.value = 'Add english word';
+
     addWordInput.addEventListener('focus', () => {
-        addWordInput.value = '';
+        if(addWordInput.value == 'Add english word'){
+            addWordInput.value = '';
+        }
     })
     addWordInput.addEventListener('focusout', () => {
-        addWordInput.value = 'Add english word';
+        if (addWordInput.value == '') {
+            addWordInput.value = 'Add english word';
+        }
     })
 
     let addTranslateInput = document.createElement('input');
     addTranslateInput.classList.add('addTranslateInput');
     wordsWrapper.appendChild(addTranslateInput);
     addTranslateInput.value = 'Add translate';
+
     addTranslateInput.addEventListener('focus', () => {
-        addTranslateInput.value = '';
+        if(addTranslateInput.value == 'Add translate'){
+            addTranslateInput.value = '';
+        }
     })
     addTranslateInput.addEventListener('focusout', () => {
-        addTranslateInput.value = 'Add translate';
+        if (addTranslateInput.value == '') {
+            addTranslateInput.value = 'Add translate';
+        }
     })
 
     let addWord = document.createElement('button');
@@ -35,38 +59,55 @@ let addWordsFunc = function () {
     addWord.innerHTML = 'ADD WORD'
     wordsWrapper.appendChild(addWord);
 
-    let mainButtonSound = new Audio;
-    mainButtonSound.src = './sounds/main-button.wav';
+    
 
     addWord.addEventListener('click', () => {
         mainButtonSound.play();
+    })
+
+    let amountOfWords = document.createElement('div');
+    amountOfWords.classList.add('wordNum');
+    wrapper.appendChild(amountOfWords);
+
+    
+
+    addWord.addEventListener('click', () => {
+        mainButtonSound.play();
+        createVocabularyElement();
+        addWordInput.value = 'Add english word';
+        addTranslateInput.value = 'Add translate'
+        amountOfWords.innerText = arr.length + '';
     })
 
     //Vocabulary section
     const vocabulary = document.createElement('div');
     vocabulary.classList.add('vocabulary');
     wrapper.appendChild(vocabulary);
-    let vocArr = [];
-    let vocObj = {};
-    let count = 1;
+    let arr = [];
+    amountOfWords.innerText = arr.length;
 
-    addWord.addEventListener('click', () => {
-        mainButtonSound.play();
-        createVocabularyElement();
-        count++;
-
+    backToPrevious.addEventListener('click', () => {
+        delSound.play();
+        wordsWrapper.remove();
+        vocabulary.remove();
+        amountOfWords.remove();
+        backToPrevious.remove();
+        createStartContent();
     })
-     
-    let createVocabularyElement = function (word, translate, nmbr) {
 
-        nmbr = count;
+    let createVocabularyElement = function () {
 
         let vocElement = document.createElement('div');
         vocElement.classList.add('vocElement');
         vocabulary.appendChild(vocElement);
+        vocabulary.dataset.id = arr.length;
 
+        //Words content
         let wordEng = document.createElement('div');
-        wordEng.innerText = 'WORD';
+        if(addWordInput.value != 'Add english word'){
+            wordEng.innerText = addWordInput.value;
+        } else wordEng.innerText = 'WORD';
+
         wordEng.classList.add('wordEng');
         vocElement.appendChild(wordEng);
 
@@ -76,41 +117,75 @@ let addWordsFunc = function () {
         vocElement.appendChild(dash);
 
         let wordTranslate = document.createElement('div');
+        if (addTranslateInput.value != 'Add translate') {
+            wordTranslate.innerText = addTranslateInput.value;
+        } else wordTranslate.innerText = 'TRANSLATE';
         wordTranslate.classList.add('wordTranslate');
-        wordTranslate.innerText = 'TRANSLATE';
         vocElement.appendChild(wordTranslate);
 
-        let wordNum = document.createElement('div');
-        wordNum.classList.add('wordNum');
-        vocElement.appendChild(wordNum);
-        wordNum.innerText = nmbr;
-
-
+        //Delete
         let del = document.createElement('button');
         del.classList.add('del');
         vocElement.appendChild(del);
-
-        let delSound = new Audio;
-        delSound.src = '../../sounds/del.wav'
-
-
-        del.addEventListener('click', () => {
-            delSound.play();
-            vocElement.remove();
-        })
-
 
         let rmvImg = document.createElement('img');
         rmvImg.classList.add('rmvImg');
         rmvImg.src = '../../remove.svg'
         del.appendChild(rmvImg);
+        arr.push(vocElement);
 
+        //Delete item action
+        del.addEventListener('click', () => {
+            delSound.play();
+            vocElement.remove();
+            arr.splice(arr[vocabulary.dataset.id], 1)
+            amountOfWords.innerText = arr.length + '';
+        })
 
-
+        
     }
 
+    let createStartContent = function () {
+        const wrapper = document.querySelector('.wrapper');
+        wrapper.classList.add('wrap');
+        wrapper.style.display = 'flex';
 
+        const addWords = document.createElement('button');
+        addWords.classList.add('addWords');
+        addWords.classList.add('main-button');
+        addWords.innerHTML = 'ADD WORDS';
+        addWords.id = '1';
+        wrapper.appendChild(addWords);
 
+        const or = document.createElement('div');
+        or.classList.add('or');
+        wrapper.appendChild(or);
+        or.innerText = 'OR'
+
+        const startTraining = document.createElement('button');
+        startTraining.classList.add('startTraining');
+        startTraining.classList.add('main-button');
+        startTraining.innerHTML = 'START TRAINING';
+        startTraining.id = 2;
+        wrapper.appendChild(startTraining);
+
+        let mainButtonArr = [];
+        mainButtonArr.push(addWords, startTraining);
+
+        let mainButtonSound = new Audio;
+        mainButtonSound.src = './sounds/main-button.wav';
+        for (let key of mainButtonArr) {
+            key.addEventListener('click', () => {
+                mainButtonSound.play();
+                addWords.remove();
+                startTraining.remove();
+                or.remove();
+                if (key.id == 1) {
+                    addWordsFunc();
+                    wrapper.style.display = 'block';
+                }
+            })
+        }
+    }
 }
-
 export default addWordsFunc;
