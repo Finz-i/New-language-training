@@ -22,7 +22,6 @@ let back = function () {
     backToPrevious.addEventListener('click', () => {
         delSound.play();
         wrapper.innerHTML = '';
-        console.log(1)
         backToPrevious.remove();
         createStartContent();
     })

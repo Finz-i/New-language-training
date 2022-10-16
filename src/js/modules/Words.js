@@ -96,7 +96,6 @@ let addWordsFunc = function () {
                 key.id = arr.indexOf(key);
                 key.id += 1;
             }
-            console.log(arr);
 
             vocabulary.innerHTML = '';
             arr.forEach((element) => {
@@ -124,7 +123,6 @@ let addWordsFunc = function () {
         vocElement.classList.add('vocElement');
         vocabulary.appendChild(vocElement);
         vocElement.dataset.id = id;
-        console.log(vocElement.dataset.id);
 
         //Words content
         let wordEng = document.createElement('div');
@@ -176,7 +174,6 @@ let addWordsFunc = function () {
             })
 
             localStorage.setItem('key', JSON.stringify(arr));
-            console.log(arr);
             amountOfWords.innerText = arr.length + '';
         })  
     }
