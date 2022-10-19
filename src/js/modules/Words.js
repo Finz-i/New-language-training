@@ -15,7 +15,7 @@ let addWordsFunc = function () {
     mainButtonSound.src = './sounds/main-button.wav';
 
     let delSound = new Audio;
-    delSound.src = '../../sounds/del.wav';
+    delSound.src = './sounds/del.wav';
 
     const wrapper = document.querySelector('.wrapper');
     wrapper.classList.add('wrap');
@@ -149,7 +149,7 @@ let addWordsFunc = function () {
 
         let rmvImg = document.createElement('img');
         rmvImg.classList.add('rmvImg');
-        rmvImg.src = '../../remove.svg';
+        rmvImg.src = './remove.svg';
         del.appendChild(rmvImg);
 
         //Delete item action
