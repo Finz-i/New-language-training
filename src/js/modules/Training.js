@@ -47,7 +47,7 @@ let training = function () {
     let defWordText = document.createElement('div');
     defWordWrap.appendChild(defWordText);
     defWordText.classList.add('defWordText');
-    defWordText.innerText = 'Выберите слова для тренировки';
+    defWordText.innerText = 'Выберите режим тренировки';
 
 
     let defWordInputs = document.createElement('div');
