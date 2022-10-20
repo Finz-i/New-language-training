@@ -88,8 +88,8 @@ let addWordsFunc = function () {
 
             obj.id = arr.length;
             obj.id += 1;
-            obj.engWord = addWordInput.value;
-            obj.translate = addTranslateInput.value;
+            obj.engWord = addWordInput.value.trim();
+            obj.translate = addTranslateInput.value.trim();
             arr.push(obj);
 
             for(let key of arr){

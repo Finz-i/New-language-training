@@ -337,7 +337,8 @@ body {
     position: relative;
 }
 
-.question{
+.question,
+.answerInput{
     width: 33%;
     height: 13%;
     background: linear-gradient(to right,rgb(175, 241, 251), rgb(56, 112, 254));
@@ -347,8 +348,9 @@ body {
     justify-content: center;
     align-items: center;
     font-weight: 900;
-    font-size: xx-large;
+    font-size: small;
     cursor: pointer;
+    text-align: center;
 }
 
 .lable{
@@ -367,7 +369,12 @@ body {
 }
 
 .answerInput{
-    width: 50%;
+    width: 205.91px;
+    height: 54.79px;
+    background: linear-gradient(to left, rgb(127, 231, 247), rgb(56, 112, 254));
+    border-radius: 13px 13px 13px 0;
+    font-size: medium;
+    outline: none;
 }
 
 .answerApply{

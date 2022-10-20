@@ -146,7 +146,7 @@ let training = function () {
 
             } else if (defWordTranslate.style.color == 'white') {
                 mainButtonSound.play();
-                console.log(2);
+                /* console.log(2); */
 
                 trainingFieldWrap.innerHTML = '';
                 trainingTranslateEvent();
@@ -173,8 +173,6 @@ let training = function () {
 
         let randomElement = arr[Math.floor(Math.random() * arr.length)];
 
-        console.log(arr);
-
         let count = 0;
 
         let mistakes = 0;
@@ -198,57 +196,60 @@ let training = function () {
             let answerInput = document.createElement('input');
             answerInput.classList.add('answerInput');
             answerWrapper.appendChild(answerInput);
+            answerInput.select();
+            
 
-            let answerApply = document.createElement('button');
-            answerApply.classList.add('answerApply');
-            answerWrapper.appendChild(answerApply);
-            answerApply.innerHTML = 'Enter';
+            answerInput.addEventListener('keyup', (e) => {
 
-            answerApply.addEventListener('click', () => {
+                if(e.key === 'Enter'){
+                    if (count <= 19) {
 
-                if (count <= 19) {
+                        if (answerInput.value.trim().toLowerCase() == randomElement.translate.trim().toLowerCase()) {
+                            claim.play();
+                            trainingFieldWrap.style.backgroundColor = 'aquamarine';
+                            setTimeout(() => {
+                                trainingFieldWrap.style.backgroundColor = 'white';
+                            }, 300);
+                            console.log(true);
 
-                    if (answerInput.value.toLowerCase() == randomElement.translate.toLowerCase()) {
-                        claim.play();
-                        trainingFieldWrap.style.backgroundColor = 'aquamarine';
-                        setTimeout(() => {
-                            trainingFieldWrap.style.backgroundColor = 'white';
-                        }, 300);
-                        console.log(true);
+                            let newRandomElement = arr[Math.floor(Math.random() * arr.length)];
 
-                        let newRandomElement = arr[Math.floor(Math.random() * arr.length)];
+                            if (newRandomElement !== randomElement) {
+                                question.innerText = newRandomElement.engWord;
+                                randomElement = newRandomElement;
+                                answerWrapper.remove();
+                                createAnswer();
+                                count++;
 
-                        if (newRandomElement !== randomElement) {
-                            question.innerText = newRandomElement.engWord;
-                            randomElement = newRandomElement;
-                            answerWrapper.remove();
-                            createAnswer();
-                            count++;
+                            } else {
+                                while (newRandomElement == randomElement) {
+                                    newRandomElement = arr[Math.floor(Math.random() * arr.length)];
+                                }
+                                randomElement = newRandomElement;
+                                question.innerText = newRandomElement.engWord;
+                                answerWrapper.remove();
+                                createAnswer();
+                                count++;
+                            }
+                            
+                            
 
                         } else {
-                            while (newRandomElement == randomElement) {
-                                newRandomElement = arr[Math.floor(Math.random() * arr.length)];
-                            }
-                            randomElement = newRandomElement;
-                            question.innerText = newRandomElement.engWord;
-                            answerWrapper.remove();
-                            createAnswer();
-                            count++;
+                            errorSound.play();
+                            trainingFieldWrap.style.backgroundColor = 'crimson';
+                            setTimeout(() => {
+                                trainingFieldWrap.style.backgroundColor = 'white';
+                            }, 300);
+                            answerInput.value = '';
+                            mistakes++;
                         }
-
-                    } else {
-                        errorSound.play();
-                        trainingFieldWrap.style.backgroundColor = 'crimson';
-                        setTimeout(() => {
-                            trainingFieldWrap.style.backgroundColor = 'white';
-                        }, 300);
-                        answerInput.value = '';
-                        mistakes++;
                     }
                 }
+                
             })
 
-            if (count == 19) question.innerText = '', setTimeout(() => {
+
+            if (count == 19) question.innerText = '', answerInput.readOnly = true, setTimeout(() => {
                 returnResults(mistakes);
 
             }, 400)
@@ -294,56 +295,57 @@ let training = function () {
             let answerInput = document.createElement('input');
             answerInput.classList.add('answerInput');
             answerWrapper.appendChild(answerInput);
+            answerInput.select();
 
-            let answerApply = document.createElement('button');
-            answerApply.classList.add('answerApply');
-            answerWrapper.appendChild(answerApply);
-            answerApply.innerHTML = 'Enter';
+            answerInput.addEventListener('keyup', (e) => {
+                if(e.key == 'Enter'){
 
-            answerApply.addEventListener('click', () => {
+                    if (count <= 19) {
 
-                if (count <= 19) {
+                        if (answerInput.value.trim().toLowerCase() == randomElement.engWord.trim().toLowerCase()) {
+                            claim.play();
+                            trainingFieldWrap.style.backgroundColor = 'aquamarine';
+                            setTimeout(() => {
+                                trainingFieldWrap.style.backgroundColor = 'white';
+                            }, 300);
+                            console.log(true);
 
-                    if (answerInput.value.toLowerCase() == randomElement.engWord.toLowerCase()) {
-                        claim.play();
-                        trainingFieldWrap.style.backgroundColor = 'aquamarine';
-                        setTimeout(() => {
-                            trainingFieldWrap.style.backgroundColor = 'white';
-                        }, 300);
-                        console.log(true);
+                            let newRandomElement = arr[Math.floor(Math.random() * arr.length)];
 
-                        let newRandomElement = arr[Math.floor(Math.random() * arr.length)];
+                            if (newRandomElement !== randomElement) {
+                                question.innerText = newRandomElement.translate;
+                                randomElement = newRandomElement;
+                                answerWrapper.remove();
+                                createAnswer();
+                                count++;
 
-                        if (newRandomElement !== randomElement) {
-                            question.innerText = newRandomElement.translate;
-                            randomElement = newRandomElement;
-                            answerWrapper.remove();
-                            createAnswer();
-                            count++;
-
-                        } else {
-                            while (newRandomElement == randomElement) {
-                                newRandomElement = arr[Math.floor(Math.random() * arr.length)];
+                            } else {
+                                while (newRandomElement == randomElement) {
+                                    newRandomElement = arr[Math.floor(Math.random() * arr.length)];
+                                }
+                                randomElement = newRandomElement;
+                                question.innerText = newRandomElement.translate;
+                                answerWrapper.remove();
+                                createAnswer();
+                                count++;
                             }
-                            randomElement = newRandomElement;
-                            question.innerText = newRandomElement.translate;
-                            answerWrapper.remove();
-                            createAnswer();
-                            count++;
+                        } else {
+                            errorSound.play();
+                            trainingFieldWrap.style.backgroundColor = 'crimson';
+                            setTimeout(() => {
+                                trainingFieldWrap.style.backgroundColor = 'white';
+                            }, 300);
+                            answerInput.value = '';
+                            mistakes++;
                         }
-                    } else {
-                        errorSound.play();
-                        trainingFieldWrap.style.backgroundColor = 'crimson';
-                        setTimeout(() => {
-                            trainingFieldWrap.style.backgroundColor = 'white';
-                        }, 300);
-                        answerInput.value = '';
-                        mistakes++;
                     }
                 }
+                
             })
 
-            if (count == 19) question.innerText = '', setTimeout(() => {
+            
+
+            if (count == 19) question.innerText = '', answerInput.readOnly = true, setTimeout(() => { 
                 returnResults(mistakes);
 
             }, 400)
@@ -388,61 +390,60 @@ let training = function () {
             let answerInput = document.createElement('input');
             answerInput.classList.add('answerInput');
             answerWrapper.appendChild(answerInput);
+            answerInput.select();
 
-            let answerApply = document.createElement('button');
-            answerApply.classList.add('answerApply');
-            answerWrapper.appendChild(answerApply);
-            answerApply.innerHTML = 'Enter';
+            answerInput.addEventListener('keyup', (e) => {
+                if(e.key == 'Enter'){
 
-            answerApply.addEventListener('click', () => {
+                    if (count <= 19) {
 
-                if (count <= 19) {
+                        if ((question.innerText == randomElement.engWord && answerInput.value.trim().toLowerCase() == randomElement.translate.trim().toLowerCase()) || (question.innerText == randomElement.translate && answerInput.value.trim().toLowerCase() == randomElement.engWord.trim().toLowerCase())) {
+                            claim.play();
+                            trainingFieldWrap.style.backgroundColor = 'aquamarine';
+                            setTimeout(() => {
+                                trainingFieldWrap.style.backgroundColor = 'white';
+                            }, 300);
+                            console.log(true);
 
-                    if ((question.innerText == randomElement.engWord && answerInput.value.toLowerCase() == randomElement.translate.toLowerCase()) || (question.innerText == randomElement.translate && answerInput.value.toLowerCase() == randomElement.engWord.toLowerCase())) {
-                        claim.play();
-                        trainingFieldWrap.style.backgroundColor = 'aquamarine';
-                        setTimeout(() => {
-                            trainingFieldWrap.style.backgroundColor = 'white';
-                        }, 300);
-                        console.log(true);
+                            let newRandomElement = arr[Math.floor(Math.random() * arr.length)];
 
-                        let newRandomElement = arr[Math.floor(Math.random() * arr.length)];
+                            if (newRandomElement !== randomElement) {
+                                randomElement = newRandomElement;
+                                if (count % 2 != 0) {
+                                    question.innerText = randomElement.engWord;
+                                } else question.innerText = randomElement.translate;
+                                answerWrapper.remove();
+                                createAnswer();
+                                count++;
 
-                        if (newRandomElement !== randomElement) {
-                            randomElement = newRandomElement;
-                            if (count % 2 != 0) {
-                                question.innerText = randomElement.engWord;
-                            } else question.innerText = randomElement.translate;
-                            answerWrapper.remove();
-                            createAnswer();
-                            count++;
+                            } else {
+                                while (newRandomElement == randomElement) {
+                                    newRandomElement = arr[Math.floor(Math.random() * arr.length)];
+                                }
+                                randomElement = newRandomElement;
+                                if (count % 2 != 0) {
+                                    question.innerText = randomElement.engWord;
+                                } else question.innerText = randomElement.translate;
+                                answerWrapper.remove();
+                                createAnswer();
+                                count++;
+                            }
 
                         } else {
-                            while (newRandomElement == randomElement) {
-                                newRandomElement = arr[Math.floor(Math.random() * arr.length)];
-                            }
-                            randomElement = newRandomElement;
-                            if (count % 2 != 0) {
-                                question.innerText = randomElement.engWord;
-                            } else question.innerText = randomElement.translate;
-                            answerWrapper.remove();
-                            createAnswer();
-                            count++;
+                            errorSound.play();
+                            trainingFieldWrap.style.backgroundColor = 'crimson';
+                            setTimeout(() => {
+                                trainingFieldWrap.style.backgroundColor = 'white';
+                            }, 300);
+                            answerInput.value = '';
+                            mistakes++;
                         }
-
-                    } else {
-                        errorSound.play();
-                        trainingFieldWrap.style.backgroundColor = 'crimson';
-                        setTimeout(() => {
-                            trainingFieldWrap.style.backgroundColor = 'white';
-                        }, 300);
-                        answerInput.value = '';
-                        mistakes++;
                     }
                 }
+                
             })
 
-            if (count == 19) question.innerText = '', setTimeout(() => {
+            if (count == 19) question.innerText = '', answerInput.readOnly = true ,setTimeout(() => {
                 returnResults(mistakes);
 
             }, 400)
@@ -461,7 +462,7 @@ let training = function () {
         let results = document.createElement('p');
         results.classList.add('results');
         trainingFieldWrap.appendChild(results);
-        results.innerHTML = `Тренировка завершена <br> Правильных ответов: ${8 - mistakes}\/8`
+        results.innerHTML = `Тренировка завершена <br> Ошибок допущено: ${mistakes}`;
     }
 
 }
