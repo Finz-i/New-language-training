@@ -114,8 +114,8 @@ let training = function () {
     defApply.innerHTML = 'APPLY';
 
     defApply.addEventListener('click', () => {
-        if (LSArr.length == 0) addElements.play();
-        if (+defQuantityInput.value <= LSArr.length && +defQuantityInput.value != 0 && +defQuantityInput.value > 1) {
+        if (LSArr != undefined && LSArr.length == 0) addElements.play();
+        if (LSArr != undefined && +defQuantityInput.value <= LSArr.length && +defQuantityInput.value != 0 && +defQuantityInput.value > 1) {
 
             if (defWordEng.style.color == 'white' && defWordTranslate.style.color == 'white') {
                 mainButtonSound.play();
@@ -159,8 +159,8 @@ let training = function () {
                 defQuantityInput.value = '';
             }
 
-        } else if (LSArr.length !== 0 && +defQuantityInput.value > LSArr.length) tooMuch.play();
-        else if (+defQuantityInput.value <= 1) needMore.play();
+        } else if (LSArr != undefined && LSArr.length !== 0 && +defQuantityInput.value > LSArr.length) tooMuch.play();
+        else if (LSArr != undefined && +defQuantityInput.value <= 1 && LSArr.length > 0) needMore.play();
     })
 
     const trainingEnglishEvent = function () {
@@ -197,12 +197,17 @@ let training = function () {
             answerInput.classList.add('answerInput');
             answerWrapper.appendChild(answerInput);
             answerInput.select();
+
+            let advice = document.createElement('p');
+            advice.classList.add('advice');
+            advice.innerHTML = 'Press Enter please'
+            answerWrapper.appendChild(advice);
             
 
             answerInput.addEventListener('keyup', (e) => {
 
                 if(e.key === 'Enter'){
-                    if (count <= 19) {
+                    if (count <= 40) {
 
                         if (answerInput.value.trim().toLowerCase() == randomElement.translate.trim().toLowerCase()) {
                             claim.play();
@@ -249,7 +254,7 @@ let training = function () {
             })
 
 
-            if (count == 19) question.innerText = '', answerInput.readOnly = true, setTimeout(() => {
+            if (count == 40) question.innerText = '', answerInput.readOnly = true, setTimeout(() => {
                 returnResults(mistakes);
 
             }, 400)
@@ -297,10 +302,15 @@ let training = function () {
             answerWrapper.appendChild(answerInput);
             answerInput.select();
 
+            let advice = document.createElement('p');
+            advice.classList.add('advice');
+            advice.innerHTML = 'Press Enter please'
+            answerWrapper.appendChild(advice);
+
             answerInput.addEventListener('keyup', (e) => {
                 if(e.key == 'Enter'){
 
-                    if (count <= 19) {
+                    if (count <= 40) {
 
                         if (answerInput.value.trim().toLowerCase() == randomElement.engWord.trim().toLowerCase()) {
                             claim.play();
@@ -345,7 +355,7 @@ let training = function () {
 
             
 
-            if (count == 19) question.innerText = '', answerInput.readOnly = true, setTimeout(() => { 
+            if (count == 40) question.innerText = '', answerInput.readOnly = true, setTimeout(() => { 
                 returnResults(mistakes);
 
             }, 400)
@@ -392,10 +402,15 @@ let training = function () {
             answerWrapper.appendChild(answerInput);
             answerInput.select();
 
+            let advice = document.createElement('p');
+            advice.classList.add('advice');
+            advice.innerHTML = 'Press Enter please'
+            answerWrapper.appendChild(advice);
+
             answerInput.addEventListener('keyup', (e) => {
                 if(e.key == 'Enter'){
 
-                    if (count <= 19) {
+                    if (count <= 40) {
 
                         if ((question.innerText == randomElement.engWord && answerInput.value.trim().toLowerCase() == randomElement.translate.trim().toLowerCase()) || (question.innerText == randomElement.translate && answerInput.value.trim().toLowerCase() == randomElement.engWord.trim().toLowerCase())) {
                             claim.play();
@@ -443,7 +458,7 @@ let training = function () {
                 
             })
 
-            if (count == 19) question.innerText = '', answerInput.readOnly = true ,setTimeout(() => {
+            if (count == 40) question.innerText = '', answerInput.readOnly = true ,setTimeout(() => {
                 returnResults(mistakes);
 
             }, 400)

@@ -1,5 +1,5 @@
-*{
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -44,10 +44,9 @@ body {
     border-radius: 15px 0 15px 15px;
     margin: 0 auto;
     margin-top: 100px;
-    width: 50%;
-    height: 700px;
+    width: 50vw;
+    height: 74vh;
     border: 2px solid white;
-    /* background-color: rgb(189, 210, 255); */
     background: linear-gradient(to right, rgba(152, 163, 255, 0.894), rgba(216, 130, 255, 0.749));
     display: flex;
     justify-content: space-around;
@@ -84,10 +83,10 @@ body {
 .vocabulary,
 .trainingFieldWrap {
     margin: 0 auto;
-    margin-top: 10px;
+    margin-top: 2.5%;
     border-radius: 23px 0 23px 23px;
     width: 77.5%;
-    height: 500px;
+    height: 70%;
     position: relative;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -119,7 +118,7 @@ body {
     border-top-color: rgb(64, 61, 255);
     border-left-color: rgb(255, 0, 98);
     border-bottom-color: rgb(171, 3, 171);
-    
+
 }
 
 .addWord {
@@ -129,7 +128,7 @@ body {
 }
 
 .defApply,
-.answerApply{
+.answerApply {
     border-color: rgb(214, 214, 214) black black rgb(214, 214, 214);
 }
 
@@ -138,7 +137,6 @@ body {
     justify-content: flex-start;
     align-items: center;
     min-height: 30px;
-    
     width: 98%;
     margin-bottom: 5px;
     border-radius: 11px 0 11px 11px;
@@ -174,17 +172,19 @@ body {
     flex-wrap: wrap;
     flex-direction: column;
     min-height: 70%;
-    width: 35%;
+    width: 40%;
     text-align: center;
-    padding-top: 5px;
     margin-left: 10px;
 }
 
 .del {
     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     left: 85.5%;
-    height: 20px;
-    width: 35px;
+    height: 4%;
+    width: 6%;
     border: 2px solid;
     border-radius: 9px;
     cursor: pointer;
@@ -205,11 +205,11 @@ body {
     height: 80%;
 }
 
-.wordNum{
+.wordNum {
     margin-left: 10%;
-    margin-top: 10px;
-    width: 57px;
-    height: 22px;
+    margin-top: 2.5%;
+    width: 11%;
+    height: 3%;
     border: 1px solid black;
     /* border-color: white black black white; */
     border-radius: 13px 0 13px 13px;
@@ -221,26 +221,26 @@ body {
     cursor: pointer;
 }
 
-.backToPrevious{
+.backToPrevious {
     position: absolute;
-    top: 2px;
+    top: 0.3%;
     left: 95.8%;
-    height: 33px;
-    width: 33px;
+    height: 4%;
+    width: 4%;
     border-radius: 18px 2px 18px 18px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.backImg{
-    height: 17px;
-    width: 17px;
+.backImg {
+    height: 80%;
+    width: 80%;
 }
 
-.defWrap{
+.defWrap {
     position: relative;
-    height: 120px;
+    height: 17.3%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -248,33 +248,33 @@ body {
 }
 
 .defQuantityWrap,
-.defWordWrap{
+.defWordWrap {
     width: 70%;
     height: 30%;
-    margin-right: 30%   ;
+    margin-right: 30%;
     display: flex;
     align-items: center;
     position: relative;
 }
 
-.defQuantityWrap{
+.defQuantityWrap {
     outline: 0 0 1px 0;
     outline-color: black;
 }
 
 .defQuantityText,
-.defWordText{
+.defWordText {
     display: flex;
     align-items: center;
     width: 60%;
-    height: 30%;
+    height: 90%;
     font-weight: 700;
-    font-size:medium;
+    font-size: small;
     position: absolute;
     left: 3%;
 }
 
-.defQuantityInput{
+.defQuantityInput {
     outline: none;
     color: white;
     width: 20%;
@@ -283,18 +283,18 @@ body {
     left: 71.5%;
 }
 
-.defWordInputs{
+.defWordInputs {
     position: absolute;
     left: 64%;
     width: 35%;
     display: flex;
     justify-content: space-between;
-    
+
     height: 70%;
 }
 
 .defWordEng,
-.defWordTranslate{
+.defWordTranslate {
     width: 45%;
     color: black;
     outline: none;
@@ -307,12 +307,11 @@ body {
     cursor: pointer;
 }
 
-.defWordTranslate{
+.defWordTranslate {
     border-radius: 10px 0 10px 10px;
 }
 
-.defApply,
-.answerApply {
+.defApply {
     position: absolute;
     display: block;
     width: 70px;
@@ -321,15 +320,15 @@ body {
     left: 80%;
 }
 
-.defApply:active{
+.defApply:active {
     margin-top: 7px;
 }
 
 .trainingFieldWrap {
-    margin-top: 40px;
+    margin-top: 3.5%;
     overflow: hidden;
     background-color: white;
-    height: 460px;
+    height: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -338,10 +337,10 @@ body {
 }
 
 .question,
-.answerInput{
+.answerInput {
     width: 33%;
     height: 13%;
-    background: linear-gradient(to right,rgb(175, 241, 251), rgb(56, 112, 254));
+    background: linear-gradient(to right, rgb(175, 241, 251), rgb(56, 112, 254));
     border-radius: 13px 0 13px 13px;
     color: black;
     display: flex;
@@ -353,33 +352,251 @@ body {
     text-align: center;
 }
 
-.lable{
+.lable {
     position: absolute;
     font-weight: 600;
     font-size: medium;
     text-align: center;
 }
 
-.answerWrapper{
+.answerWrapper {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-direction: column;
+    position: relative;
     width: 70%;
-    height: 70px;
+    height: 15%;
 }
 
-.answerInput{
-    width: 205.91px;
-    height: 54.79px;
+.answerInput {
+    width: 47%;
+    height: 80%;
     background: linear-gradient(to left, rgb(127, 231, 247), rgb(56, 112, 254));
     border-radius: 13px 13px 13px 0;
     font-size: medium;
     outline: none;
 }
 
-.answerApply{
-    left: 70%;
-    height: 50px;
-    width: 50px;
-    font-size: x-small;
+.advice {
+    position: absolute;
+    top: 90%;
+}
+
+@media (max-width: 1025px) {
+    .wrap {
+        width: 60vw;
+        height: 80vh;
+        margin-top: 50px;
+    }
+
+    .addWordInput,
+    .addTranslateInput,
+    .wordNum {
+        font-size: small;
+        font-weight: 400;
+    }
+
+    .addWord {
+        font-size: xx-small;
+    }
+
+    .backToPrevious {
+        width: 7%;
+        left: 92.8%;
+        height: 4%;
+    }
+
+    .defWrap{
+        font-size: small;
+    }
+
+    .defWordInputs{
+        width: 140px;
+        left: 59%;
+    }
+}
+
+@media (max-width: 769px) {
+    .wrap {
+        width: 85vw;
+        height: 90vh;
+        margin-top: 30px;
+    }
+
+    .addWord {
+        font-size: xx-small;
+    }
+
+    .backToPrevious {
+        width: 6%;
+        left: 93.5%;
+        height: 3.5%;
+    }
+
+    .defWordInputs{
+        left: 60%;
+        width: 152px;
+    }
+
+    .defApply{
+        height: 70px;
+        width: 70px;
+    }
+}
+
+@media (max-width: 601px){
+.defWordInputs {
+        left: 55%;
+        width: 152px;
+    }
+
+    .defApply {
+        height: 60px;
+        width: 60px;
+    }
+}
+
+@media (max-width: 426px) {
+    body {
+        background-color: black;
+    }
+
+    .wrap {
+        position: relative;
+        width: 85vw;
+        height: 85vh;
+        margin-top: 15px;
+        flex-direction: column;
+        border: none;
+    }
+
+    .backToPrevious {
+        width: 7.5%;
+        left: 91.5%;
+        height: 3%;
+    }
+
+    .vocabulary,
+    .trainingFieldWrap {
+        width: 91%;
+        height: 79%;
+        margin-top: 30%;
+    }
+
+    .wordNum {
+        position: absolute;
+        top: 11.7%;
+        right: 41%;
+        width: 15%;
+        z-index: 1;
+    }
+
+    .del {
+        width: 20px;
+        height: 20px;
+        border-radius: 100%;
+    }
+
+    .rmvImg {
+        width: 10px;
+        height: 15px;
+    }
+
+    .wordsWrapper,
+    .defWrap {
+        position: absolute;
+        top: 0.3%;
+        left: 1%;
+        margin: 0 auto;
+        border-radius: 19px 0 19px 19px;
+        width: 87.5%;
+        height: 70px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: rgb(255, 255, 255);
+        border: 2px solid;
+        border-left-color: rgb(0, 128, 85);
+        border-top-color: rgb(64, 61, 255);
+        border-right-color: rgb(255, 0, 98);
+        border-bottom-color: rgb(64, 61, 255);
+    }
+
+    .addWord {
+        font-size: xx-small;
+    }
+
+    .wordEng,
+    .dash,
+    .wordTranslate {
+        font-size: x-small;
+    }
+
+    .wordsWrapper input {
+        font-size: x-small;
+        border-radius: 15px 15px 15px 15px;
+    }
+
+    .addWord{
+        width: 50px; 
+        height: 50px;
+        border-radius: 100%;
+    }
+
+    .defWordText,
+    .defQuantityText{
+        font-size: xx-small;
+    }
+
+    .defWordInputs{
+        width: 100px;
+        font-size: x-small;
+        left: 66%;
+    }
+    .defWordEng,
+    .defWordTranslate{
+        width: 45px;
+    }
+
+    .question{
+        width: 60%;
+    }
+
+    .answerInput{
+        width: 84%;
+    }
+
+    .trainingFieldWrap {
+        width: 91%;
+        height: 79%;
+        margin-top: 25%;
+    }
+
+    .defWrap{
+        height: 80px;
+    }
+
+}
+
+@media (max-width: 419px) {
+    .defWordInputs {
+        left: 58%;
+        width: 100px;
+    }
+
+    .defApply {
+        height: 40px;
+        width: 40px;
+        font-size: xx-small;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (max-height: 650px){
+    .wordNum{
+        display: none;
+    };
 }
