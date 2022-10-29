@@ -10,7 +10,11 @@ let training = function () {
 
     const wrapper = document.querySelector('.wrapper');
     wrapper.classList.add('wrap');
-    wrapper.style.display = 'block';
+    wrapper.style.display = 'flex';
+    wrapper.style.flexDirection = 'row';
+    wrapper.style.justifyContent = 'space-around';
+    wrapper.style.aliginItems = 'center';
+    wrapper.style.paddingTop = '0';
 
     let quantity = 0;
 
@@ -29,8 +33,8 @@ let training = function () {
     let errorSound = new Audio;
     errorSound.src = './sounds/error.wav';
 
-    let complete = new Audio;
-    complete.src = './sounds/complete.mp3';
+    let win = new Audio;
+    win.src = './sounds/win.mp3';
 
     let needMore = new Audio;
     needMore.src = './sounds/needMore.mp3';
@@ -38,6 +42,21 @@ let training = function () {
     let defWrap = document.createElement('div');
     defWrap.classList.add('defWrap');
     wrapper.appendChild(defWrap);
+
+    let defDescr = document.createElement('div');
+    defDescr.classList.add('defDescr');
+    defWrap.appendChild(defDescr);
+
+    let defDescrHeader = document.createElement('h3');
+    defDescrHeader.classList.add('defDescrHeader');
+    defDescr.appendChild(defDescrHeader);
+    defDescrHeader.innerHTML = 'Тренування';
+
+    let defDescrText = document.createElement('p');
+    defDescrText.classList.add('defDescrText');
+    defDescr.appendChild(defDescrText);
+    defDescrText.innerHTML = 'У цьому вікні Ви можете обрати режим тренування (переклад з/на англійську, або мікс-режим, обравши два попередніх разом).<br><br>Крім того Вам необхідно указати кількість слів, якої вам буде достатньо для опрацювання.'
+
 
     //Define type of training
     let defWordWrap = document.createElement('div');
@@ -47,7 +66,7 @@ let training = function () {
     let defWordText = document.createElement('div');
     defWordWrap.appendChild(defWordText);
     defWordText.classList.add('defWordText');
-    defWordText.innerText = 'Выберите режим тренировки';
+    defWordText.innerText = 'Виберіть режим тренування';
 
 
     let defWordInputs = document.createElement('div');
@@ -67,7 +86,7 @@ let training = function () {
     defWordTranslate.classList.add('defWordTranslate');
     defWordTranslate.readOnly = 1;
     defWordTranslate.dataset.id = 1;
-    defWordTranslate.value = 'Перевод';
+    defWordTranslate.value = 'Переклад';
     defWordTranslate.style.color = 'black';
 
     let arr = [];
@@ -96,30 +115,55 @@ let training = function () {
     let defQantityText = document.createElement('div');
     defQantityText.classList.add('defQuantityText');
     defQuantityWrap.appendChild(defQantityText);
-    defQantityText.innerHTML = 'Выберите кол-во слов для тренировки';
+    defQantityText.innerHTML = 'Виберіть кількість слів/фраз, яка будe опрацьована';
+
+    let defQuantityInputWrap = document.createElement('div');
+    defQuantityInputWrap.classList.add('defQuantityInputWrap');
+    defQuantityWrap.appendChild(defQuantityInputWrap);
 
     let defQuantityInput = document.createElement('input');
     defQuantityInput.classList.add('defQuantityInput');
-    defQuantityWrap.appendChild(defQuantityInput);
+    defQuantityInputWrap.appendChild(defQuantityInput);
     defQuantityInput.maxLength = '10';
 
+    let defApply = document.createElement('button');
+    defApply.classList.add('defApply');
+    defWrap.appendChild(defApply);
+    defApply.innerHTML = 'Підтвердити';
 
     const trainingFieldWrap = document.createElement('div');
     trainingFieldWrap.classList.add('trainingFieldWrap');
     wrapper.appendChild(trainingFieldWrap);
 
-    let defApply = document.createElement('button');
-    defApply.classList.add('defApply');
-    defWrap.appendChild(defApply);
-    defApply.innerHTML = 'APPLY';
-
     defApply.addEventListener('click', () => {
-        if (LSArr != undefined && LSArr.length == 0) addElements.play();
+
+        if (LSArr != undefined && LSArr.length == 0) {
+            //Add new elements to vocabulary
+            errorSound.play();
+            let alertText = document.createElement('div');
+            defWrap.appendChild(alertText);
+            alertText.classList.add('alert');
+            alertText.innerText = 'Ваш словник пустий. Наповніть його новими словами/фразами!';
+
+            setTimeout(() => {
+                alertText.style.width = '0.1px';
+                alertText.style.height = '0.1px';
+                alertText.style.backgroundColor = 'white';
+                alertText.innerText = '';
+                alertText.style.left = '37%';
+                alertText.style.top = '90%';
+                setTimeout(() => {
+                    alertText.remove();
+                }, 200)
+            }, 2500);
+
+
+        }
         if (LSArr != undefined && +defQuantityInput.value <= LSArr.length && +defQuantityInput.value != 0 && +defQuantityInput.value > 1) {
 
             if (defWordEng.style.color == 'white' && defWordTranslate.style.color == 'white') {
                 mainButtonSound.play();
-                console.log(3);
+                defWrap.remove();
 
                 trainingFieldWrap.innerHTML = '';
                 trainingCombineEvent();
@@ -132,7 +176,7 @@ let training = function () {
 
             } else if (defWordEng.style.color == 'white') {
                 mainButtonSound.play();
-                console.log(1);
+                defWrap.remove();
 
                 trainingFieldWrap.innerHTML = '';
                 trainingEnglishEvent();
@@ -146,7 +190,7 @@ let training = function () {
 
             } else if (defWordTranslate.style.color == 'white') {
                 mainButtonSound.play();
-                /* console.log(2); */
+                defWrap.remove();
 
                 trainingFieldWrap.innerHTML = '';
                 trainingTranslateEvent();
@@ -159,12 +203,55 @@ let training = function () {
                 defQuantityInput.value = '';
             }
 
-        } else if (LSArr != undefined && LSArr.length !== 0 && +defQuantityInput.value > LSArr.length) tooMuch.play();
-        else if (LSArr != undefined && +defQuantityInput.value <= 1 && LSArr.length > 0) needMore.play();
+        } else if (LSArr != undefined && LSArr.length !== 0 && +defQuantityInput.value > LSArr.length){
+            errorSound.play();
+            let alertText = document.createElement('div');
+            defWrap.appendChild(alertText);
+            alertText.classList.add('alert');
+            alertText.innerText = 'Ви вказали більшу кількість слів, ніж є у словнику!';
+
+            setTimeout(() => {
+                alertText.style.width = '0.1px';
+                alertText.style.height = '0.1px';
+                alertText.style.backgroundColor = 'white';
+                alertText.innerText = '';
+                alertText.style.left = '37%';
+                alertText.style.top = '90%';
+                setTimeout(() => {
+                    alertText.remove();
+                }, 200)
+            }, 2500);
+        }
+        else if (LSArr != undefined && +defQuantityInput.value <= 1 && LSArr.length > 0) {
+            errorSound.play();
+            let alertText = document.createElement('div');
+            defWrap.appendChild(alertText);
+            alertText.classList.add('alert');
+            alertText.innerText = 'Вам потрібно обрати не менше двох елементів словника!';
+
+            setTimeout(() => {
+                alertText.style.width = '0.1px';
+                alertText.style.height = '0.1px';
+                alertText.style.backgroundColor = 'white';
+                alertText.innerText = '';
+                alertText.style.left = '37%';
+                alertText.style.top = '90%';
+                setTimeout(() => {
+                    alertText.remove();
+                }, 200)
+            }, 2500);
+            
+        };
     })
+
+    let mistakesArr = [];
 
     const trainingEnglishEvent = function () {
 
+        trainingFieldWrap.style.justifyContent = 'space-around'; 
+        trainingFieldWrap.style.display = 'flex';
+
+        console.log(trainingFieldWrap.style.backgroundColor == 0)
         let arr = [];
 
         for (let i = 0; i < +defQuantityInput.value; i++) {
@@ -177,15 +264,62 @@ let training = function () {
 
         let mistakes = 0;
 
+        let trainingHeader = document.createElement('div');
+        trainingHeader.classList.add('trainingHeader');
+        trainingFieldWrap.appendChild(trainingHeader);
+
+        let progress = document.createElement('div');
+        progress.classList.add('progress');
+        trainingHeader.appendChild(progress);
+
+        let postProgressWrapper = document.createElement('div');
+        postProgressWrapper.classList.add('postProgressWrapper');
+        progress.appendChild(postProgressWrapper);
+
+        let postProgress = document.createElement('div');
+        postProgress.classList.add('postProgress');
+        postProgressWrapper.appendChild(postProgress);
+
+        let progressWidth = 0;
+
+        let progressText = document.createElement('div');
+        progress.appendChild(progressText);
+        progressText.innerText = `Progress: ${count}/30`;  
+        progressText.style.zIndex = '1';  
+        progressText.style.position = 'absolute';
+
+        let backToModeMenu = document.createElement('button');
+        backToModeMenu.classList.add('backToModeMenu');
+        trainingFieldWrap.appendChild(backToModeMenu);
+        backToModeMenu.innerHTML = 'Back to menu';
+
+        backToModeMenu.addEventListener('click', () => {
+            removeSound.play();
+            trainingFieldWrap.remove();
+            training();
+        })
+
         let question = document.createElement('div');
         question.classList.add('question');
         trainingFieldWrap.appendChild(question);
         question.innerText = randomElement.engWord;
 
-        let lable = document.createElement('p');
+        let lable = document.createElement('div');
         lable.classList.add('lable');
         trainingFieldWrap.appendChild(lable);
-        lable.innerHTML = 'Make a translation please';
+        lable.innerText = 'Make a translation please';
+
+        let claimFunc = function () {
+            claim.play();
+            trainingFieldWrap.style.backgroundColor = 'aquamarine';
+            lable.classList.add('lableTrue');
+            lable.innerText = 'TRUE!)'
+            setTimeout(() => {
+                trainingFieldWrap.style.backgroundColor = 'white';
+                lable.classList.remove('lableTrue');
+                lable.innerText = 'Make a translation please';
+            }, 300);
+        }
 
         let createAnswer = function () {
 
@@ -203,20 +337,13 @@ let training = function () {
             advice.innerHTML = 'Press Enter please'
             answerWrapper.appendChild(advice);
             
-
             answerInput.addEventListener('keyup', (e) => {
 
                 if(e.key === 'Enter'){
-                    if (count <= 40) {
-
+                    if (count <= 29 && answerInput.readOnly == false) {
+                        
                         if (answerInput.value.trim().toLowerCase() == randomElement.translate.trim().toLowerCase()) {
-                            claim.play();
-                            trainingFieldWrap.style.backgroundColor = 'aquamarine';
-                            setTimeout(() => {
-                                trainingFieldWrap.style.backgroundColor = 'white';
-                            }, 300);
-                            console.log(true);
-
+                            claimFunc();
                             let newRandomElement = arr[Math.floor(Math.random() * arr.length)];
 
                             if (newRandomElement !== randomElement) {
@@ -225,8 +352,10 @@ let training = function () {
                                 answerWrapper.remove();
                                 createAnswer();
                                 count++;
-
+                                progressText.innerText = `Progress: ${count}/30`;
+                                
                             } else {
+                                claimFunc();
                                 while (newRandomElement == randomElement) {
                                     newRandomElement = arr[Math.floor(Math.random() * arr.length)];
                                 }
@@ -235,18 +364,20 @@ let training = function () {
                                 answerWrapper.remove();
                                 createAnswer();
                                 count++;
+                                progressText.innerText = `Progress: ${count}/30`;
+                                
                             }
-                            
-                            
+                            postProgress.style.width = `${progressWidth += 3.333}%`
 
                         } else {
-                            errorSound.play();
-                            trainingFieldWrap.style.backgroundColor = 'crimson';
+                            answerInput.readOnly = true;
+                            falseFunc(randomElement.translate);
                             setTimeout(() => {
-                                trainingFieldWrap.style.backgroundColor = 'white';
-                            }, 300);
+                                answerInput.readOnly = false;
+                            }, 2000);
                             answerInput.value = '';
                             mistakes++;
+                            mistakesArr.push(randomElement.engWord);
                         }
                     }
                 }
@@ -254,10 +385,36 @@ let training = function () {
             })
 
 
-            if (count == 40) question.innerText = '', answerInput.readOnly = true, setTimeout(() => {
-                returnResults(mistakes);
+            if (count == 29) {
+            
+                setTimeout(() => {
+                    trainingFieldWrap.innerHTML = '';
+                    question.innerText = '';
+                    answerInput.readOnly = true;
+                    postProgress.style.width = '100%';
 
-            }, 400)
+                    let blinkFunc = function (target) {
+                        if (target.style.backgroundColor == 'white') target.style.backgroundColor = 'aquamarine';
+                        else if (target.style.backgroundColor == 'aquamarine') target.style.backgroundColor = 'white';
+                    }
+
+                    setTimeout(() => {
+                        win.play();
+                        let timer = setInterval(() => {
+                            blinkFunc(trainingFieldWrap);
+                        }, 200);
+                        setTimeout(() => {
+                            clearInterval(timer);
+                        }, 2000);
+
+                    }, 400);
+
+                    setTimeout(() => {
+                        trainingFieldWrap.style.backgroundColor = 'white';
+                        returnResults(mistakes);
+                    }, 2200);
+                }, 200)
+            }
         }
 
 
@@ -266,6 +423,10 @@ let training = function () {
 
 
     const trainingTranslateEvent = function () {
+
+        trainingFieldWrap.style.justifyContent = 'space-around'; 
+        trainingFieldWrap.style.display = 'flex';
+
         let arr = [];
 
         for (let i = 0; i < +defQuantityInput.value; i++) {
@@ -280,6 +441,41 @@ let training = function () {
         let count = 0;
 
         let mistakes = 0;
+
+        let trainingHeader = document.createElement('div');
+        trainingHeader.classList.add('trainingHeader');
+        trainingFieldWrap.appendChild(trainingHeader);
+
+        let progress = document.createElement('div');
+        progress.classList.add('progress');
+        trainingHeader.appendChild(progress);
+
+        let postProgressWrapper = document.createElement('div');
+        postProgressWrapper.classList.add('postProgressWrapper');
+        progress.appendChild(postProgressWrapper);
+
+        let postProgress = document.createElement('div');
+        postProgress.classList.add('postProgress');
+        postProgressWrapper.appendChild(postProgress);
+
+        let progressWidth = 0;
+
+        let progressText = document.createElement('div');
+        progress.appendChild(progressText);
+        progressText.innerText = `Progress: ${count}/30`;
+        progressText.style.zIndex = '1';
+        progressText.style.position = 'absolute';
+
+        let backToModeMenu = document.createElement('button');
+        backToModeMenu.classList.add('backToModeMenu');
+        trainingFieldWrap.appendChild(backToModeMenu);
+        backToModeMenu.innerHTML = 'Back to menu';
+
+        backToModeMenu.addEventListener('click', () => {
+            removeSound.play();
+            trainingFieldWrap.remove();
+            training();
+        })
 
         let question = document.createElement('div');
         question.classList.add('question');
@@ -310,16 +506,18 @@ let training = function () {
             answerInput.addEventListener('keyup', (e) => {
                 if(e.key == 'Enter'){
 
-                    if (count <= 40) {
+                    if (count <= 29 && answerInput.readOnly == false) {
 
                         if (answerInput.value.trim().toLowerCase() == randomElement.engWord.trim().toLowerCase()) {
                             claim.play();
                             trainingFieldWrap.style.backgroundColor = 'aquamarine';
+                            lable.classList.add('lableTrue');
+                            lable.innerText = 'TRUE!)'
                             setTimeout(() => {
                                 trainingFieldWrap.style.backgroundColor = 'white';
-                            }, 300);
-                            console.log(true);
-
+                                lable.classList.remove('lableTrue');
+                                lable.innerText = 'Make a translation please';
+                            }, 400);
                             let newRandomElement = arr[Math.floor(Math.random() * arr.length)];
 
                             if (newRandomElement !== randomElement) {
@@ -328,6 +526,7 @@ let training = function () {
                                 answerWrapper.remove();
                                 createAnswer();
                                 count++;
+                                progressText.innerText = `Progress: ${count}/30`;
 
                             } else {
                                 while (newRandomElement == randomElement) {
@@ -338,15 +537,18 @@ let training = function () {
                                 answerWrapper.remove();
                                 createAnswer();
                                 count++;
+                                progressText.innerText = `Progress: ${count}/30`;
                             }
+                            postProgress.style.width = `${progressWidth += 3.333}%`
                         } else {
-                            errorSound.play();
-                            trainingFieldWrap.style.backgroundColor = 'crimson';
+                            answerInput.readOnly = true;
+                            falseFunc(randomElement.engWord);
                             setTimeout(() => {
-                                trainingFieldWrap.style.backgroundColor = 'white';
-                            }, 300);
+                                answerInput.readOnly = false;
+                            }, 2000);
                             answerInput.value = '';
                             mistakes++;
+                            mistakesArr.push(randomElement.translate);
                         }
                     }
                 }
@@ -355,10 +557,36 @@ let training = function () {
 
             
 
-            if (count == 40) question.innerText = '', answerInput.readOnly = true, setTimeout(() => { 
-                returnResults(mistakes);
+            if (count == 29) {
 
-            }, 400)
+                setTimeout(() => {
+                    trainingFieldWrap.innerHTML = '';
+                    question.innerText = '';
+                    answerInput.readOnly = true;
+                    postProgress.style.width = '100%';
+
+                    let blinkFunc = function (target) {
+                        if (target.style.backgroundColor == 'white') target.style.backgroundColor = 'aquamarine';
+                        else if (target.style.backgroundColor == 'aquamarine') target.style.backgroundColor = 'white';
+                    }
+
+                    setTimeout(() => {
+                        win.play();
+                        let timer = setInterval(() => {
+                            blinkFunc(trainingFieldWrap);
+                        }, 200);
+                        setTimeout(() => {
+                            clearInterval(timer);
+                        }, 2000);
+
+                    }, 400);
+
+                    setTimeout(() => {
+                        trainingFieldWrap.style.backgroundColor = 'white';
+                        returnResults(mistakes);
+                    }, 2200);
+                }, 200)
+            }
         }
 
 
@@ -367,6 +595,10 @@ let training = function () {
 
 
     const trainingCombineEvent = function () {
+
+        trainingFieldWrap.style.justifyContent = 'space-around'; 
+        trainingFieldWrap.style.display = 'flex';
+
         let arr = [];
 
         for (let i = 0; i < +defQuantityInput.value; i++) {
@@ -380,6 +612,41 @@ let training = function () {
         let count = 0;
 
         let mistakes = 0;
+
+        let trainingHeader = document.createElement('div');
+        trainingHeader.classList.add('trainingHeader');
+        trainingFieldWrap.appendChild(trainingHeader);
+
+        let progress = document.createElement('div');
+        progress.classList.add('progress');
+        trainingHeader.appendChild(progress);
+
+        let postProgressWrapper = document.createElement('div');
+        postProgressWrapper.classList.add('postProgressWrapper');
+        progress.appendChild(postProgressWrapper);
+
+        let postProgress = document.createElement('div');
+        postProgress.classList.add('postProgress');
+        postProgressWrapper.appendChild(postProgress);
+
+        let progressWidth = 0;
+
+        let progressText = document.createElement('div');
+        progress.appendChild(progressText);
+        progressText.innerText = `Progress: ${count}/30`;
+        progressText.style.zIndex = '1';
+        progressText.style.position = 'absolute';
+
+        let backToModeMenu = document.createElement('button');
+        backToModeMenu.classList.add('backToModeMenu');
+        trainingFieldWrap.appendChild(backToModeMenu);
+        backToModeMenu.innerHTML = 'Back to menu';
+
+        backToModeMenu.addEventListener('click', () => {
+            removeSound.play();
+            trainingFieldWrap.remove();
+            training();
+        })
 
         let question = document.createElement('div');
         question.classList.add('question');
@@ -410,16 +677,18 @@ let training = function () {
             answerInput.addEventListener('keyup', (e) => {
                 if(e.key == 'Enter'){
 
-                    if (count <= 40) {
+                    if (count <= 29 && answerInput.readOnly == false) {
 
                         if ((question.innerText == randomElement.engWord && answerInput.value.trim().toLowerCase() == randomElement.translate.trim().toLowerCase()) || (question.innerText == randomElement.translate && answerInput.value.trim().toLowerCase() == randomElement.engWord.trim().toLowerCase())) {
                             claim.play();
                             trainingFieldWrap.style.backgroundColor = 'aquamarine';
+                            lable.classList.add('lableTrue');
+                            lable.innerText = 'TRUE!)'
                             setTimeout(() => {
                                 trainingFieldWrap.style.backgroundColor = 'white';
-                            }, 300);
-                            console.log(true);
-
+                                lable.classList.remove('lableTrue');
+                                lable.innerText = 'Make a translation please';
+                            }, 400);
                             let newRandomElement = arr[Math.floor(Math.random() * arr.length)];
 
                             if (newRandomElement !== randomElement) {
@@ -430,6 +699,7 @@ let training = function () {
                                 answerWrapper.remove();
                                 createAnswer();
                                 count++;
+                                progressText.innerText = `Progress: ${count}/30`;
 
                             } else {
                                 while (newRandomElement == randomElement) {
@@ -442,26 +712,59 @@ let training = function () {
                                 answerWrapper.remove();
                                 createAnswer();
                                 count++;
+                                progressText.innerText = `Progress: ${count}/30`;
                             }
+                            postProgress.style.width = `${progressWidth += 3.333}%`
 
-                        } else {
-                            errorSound.play();
-                            trainingFieldWrap.style.backgroundColor = 'crimson';
+                        } else{
+                            answerInput.readOnly = true;
+                            if (question.innerText == randomElement.engWord && answerInput.value.trim().toLowerCase() != randomElement.translate.trim().toLowerCase() ) {
+                                falseFunc(randomElement.translate);
+                            } else if (question.innerText == randomElement.translate && answerInput.value.trim().toLowerCase() != randomElement.engWord.trim().toLowerCase()){
+                                falseFunc(randomElement.engWord);
+                            } 
                             setTimeout(() => {
-                                trainingFieldWrap.style.backgroundColor = 'white';
-                            }, 300);
+                                answerInput.readOnly = false;
+                            }, 2000);
                             answerInput.value = '';
                             mistakes++;
+                            mistakesArr.push(randomElement.engWord);
                         }
                     }
                 }
                 
             })
 
-            if (count == 40) question.innerText = '', answerInput.readOnly = true ,setTimeout(() => {
-                returnResults(mistakes);
+            if (count == 29) {
 
-            }, 400)
+                setTimeout(() => {
+                    trainingFieldWrap.innerHTML = '';
+                    question.innerText = '';
+                    answerInput.readOnly = true;
+                    postProgress.style.width = '100%';
+
+                    let blinkFunc = function (target) {
+                        if (target.style.backgroundColor == 'white') target.style.backgroundColor = 'aquamarine';
+                        else if (target.style.backgroundColor == 'aquamarine') target.style.backgroundColor = 'white';
+                    }
+
+                    setTimeout(() => {
+                        win.play();
+                        let timer = setInterval(() => {
+                            blinkFunc(trainingFieldWrap);
+                        }, 200);
+                        setTimeout(() => {
+                            clearInterval(timer);
+                        }, 2000);
+
+                    }, 400);
+
+                    setTimeout(() => {
+                        trainingFieldWrap.style.backgroundColor = 'white';
+                        returnResults(mistakes);
+                    }, 2200);
+                }, 200)
+            }
         }
 
 
@@ -469,15 +772,91 @@ let training = function () {
     }
 
     let returnResults = function (mistakes) {
-        complete.play();
+
+        let newMistakesArr = mistakesArr.filter((value, index) => {
+            return mistakesArr.indexOf(value) === index;
+        })
+        console.log(newMistakesArr)
+
+        trainingFieldWrap.style.justifyContent = 'space-between';
 
         mistakes = +mistakes;
+
         trainingFieldWrap.innerHTML = '';
+
+        let backToModeMenu = document.createElement('button');
+        backToModeMenu.classList.add('backToModeMenu');
+        trainingFieldWrap.appendChild(backToModeMenu);
+        backToModeMenu.classList.add('backToModeMenuAftertrain');
+
+        let backImg = document.createElement('img');
+        backImg.classList.add('backImg');
+        backToModeMenu.appendChild(backImg);
+        backImg.src = './remove.svg';
+
+        backToModeMenu.addEventListener('click', () => {
+            removeSound.play();
+            trainingFieldWrap.remove();
+            training();
+        })
 
         let results = document.createElement('p');
         results.classList.add('results');
         trainingFieldWrap.appendChild(results);
-        results.innerHTML = `Тренировка завершена <br> Ошибок допущено: ${mistakes}`;
+        results.innerHTML = `Тренування закінчено <br> Помилок зроблено: ${mistakes}`;
+
+        if(mistakes == 0){
+            trainingFieldWrap.style.justifyContent = 'center';
+        }
+
+        if(mistakes > 0){
+            let resultsLable = document.createElement('h3');
+            resultsLable.classList.add('resultsLable');
+            trainingFieldWrap.appendChild(resultsLable);
+            resultsLable.innerHTML = 'Наступні слова/фрази потребують вашої уваги:'
+
+            let resultsWrapper = document.createElement('div');
+            resultsWrapper.classList.add('resultsWrapper');
+            trainingFieldWrap.appendChild(resultsWrapper);
+
+            for (let key of newMistakesArr) {
+                let resultsListEl = document.createElement('div');
+                resultsListEl.classList.add('resultsList');
+                resultsWrapper.appendChild(resultsListEl);
+                resultsListEl.innerText = key;
+            }
+        }
+
+        mistakesArr = [];
+    }
+
+    let falseFunc = function (answer) {
+
+        let falseAlertWrap = document.createElement('div');
+        falseAlertWrap.classList.add('falseAlertWrap');
+        trainingFieldWrap.appendChild(falseAlertWrap);
+
+        let falseAlertHeader = document.createElement('h3');
+        falseAlertWrap.appendChild(falseAlertHeader);
+        falseAlertHeader.innerHTML = 'ПОМИЛКА';
+        falseAlertHeader.style.color = 'crimson';
+
+        let falseAlertLable = document.createElement('div');
+        falseAlertLable.classList.add('falseAlertLable');
+        falseAlertWrap.appendChild(falseAlertLable);
+        falseAlertLable.innerText = 'Правильна відповідь -';
+
+        let falseAlertTrue = document.createElement('h4');
+        falseAlertTrue.classList.add('falseAlertTrue');
+        falseAlertWrap.appendChild(falseAlertTrue);
+        falseAlertTrue.innerHTML = `${answer}`;
+
+        errorSound.play();
+        trainingFieldWrap.style.backgroundColor = 'crimson';
+        setTimeout(() => {
+            trainingFieldWrap.style.backgroundColor = 'white';
+            falseAlertWrap.remove();
+        }, 2000);
     }
 
 }

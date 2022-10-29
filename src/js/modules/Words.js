@@ -19,6 +19,8 @@ let addWordsFunc = function () {
 
     const wrapper = document.querySelector('.wrapper');
     wrapper.classList.add('wrap');
+    console.log(wrapper.style.display);
+    wrapper.style.padding = '30px 0';
 
     const wordsWrapper = document.createElement('div');
     wordsWrapper.classList.add('wordsWrapper');
@@ -79,7 +81,7 @@ let addWordsFunc = function () {
 
     addWord.addEventListener('click', () => {
         mainButtonSound.play();
-        if (addWordInput.value != '' && addWordInput != 'Add english word' && addTranslateInput.value != '' && addTranslateInput.value != 'Add translate'){
+        if ((addTranslateInput.value != '' && addTranslateInput.value != 'Add translate') && (addWordInput.value != '' && addWordInput.value != 'Add english word')){
             let obj = {
                 id: '',
                 engWord: '',
@@ -88,8 +90,37 @@ let addWordsFunc = function () {
 
             obj.id = arr.length;
             obj.id += 1;
-            obj.engWord = addWordInput.value.trim();
-            obj.translate = addTranslateInput.value.trim();
+
+            let engArr = [];
+
+            engArr.push(addWordInput.value[0].toUpperCase());
+            for(let i = 1; i <= addWordInput.value.length-1; i++){
+                engArr.push(addWordInput.value[i]);
+            }
+            
+            let newEngStr = '';
+
+            for(let key of engArr){
+                newEngStr += key;
+            }
+            
+            obj.engWord = newEngStr.trim();
+
+
+            let translateArr = [];
+
+            translateArr.push(addTranslateInput.value[0].toUpperCase());
+            for(let i = 1; i <= addTranslateInput.value.length-1; i++){
+                translateArr.push(addTranslateInput.value[i])
+            }
+
+            let newTranslateStr = '';
+
+            for(let key of translateArr){
+                newTranslateStr += key;
+            }
+
+            obj.translate = newTranslateStr.trim();
             arr.push(obj);
 
             for(let key of arr){
