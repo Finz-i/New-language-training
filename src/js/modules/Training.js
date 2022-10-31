@@ -3,7 +3,7 @@ import back from './backToPreviuousPage.js';
 let training = function () {
     back();
 
-    let LSArr = JSON.parse(localStorage.getItem('key'))
+    let LSArr = JSON.parse(localStorage.getItem('key'));
 
     let tooMuch = new Audio;
     tooMuch.src = './sounds/too-much.wav';

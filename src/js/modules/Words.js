@@ -5,6 +5,8 @@ let addWordsFunc = function () {
 
     back();
 
+    console.log(localStorage.length);
+
     if(localStorage.length != 0){
         for (let key of JSON.parse(localStorage.getItem('key'))){
             key.id = JSON.parse(localStorage.getItem('key')).indexOf(key);  
