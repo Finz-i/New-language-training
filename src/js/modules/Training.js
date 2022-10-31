@@ -158,10 +158,12 @@ let training = function () {
                 alertText.innerText = '';
                 alertText.style.left = '37%';
                 alertText.style.top = '90%';
+                defApply.disabled = false;
                 setTimeout(() => {
                     alertText.remove();
                 }, 200)
             }, 2500);
+            defApply.disabled = true;
 
 
         }
