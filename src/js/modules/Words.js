@@ -20,7 +20,6 @@ let addWordsFunc = function () {
     const wrapper = document.querySelector('.wrapper');
     wrapper.classList.add('wrap');
     console.log(wrapper.style.display);
-    wrapper.style.padding = '30px 0';
 
     const wordsWrapper = document.createElement('div');
     wordsWrapper.classList.add('wordsWrapper');

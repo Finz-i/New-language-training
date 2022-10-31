@@ -14,6 +14,8 @@ let back = function () {
     backToPrevious.classList.add('backToPrevious');
     wrapper.appendChild(backToPrevious);
 
+    backToPrevious.style.zIndex = 2;
+
     let backImg = document.createElement('img');
     backImg.classList.add('backImg');
     backToPrevious.appendChild(backImg);

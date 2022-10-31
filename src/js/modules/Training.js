@@ -126,6 +126,12 @@ let training = function () {
     defQuantityInputWrap.appendChild(defQuantityInput);
     defQuantityInput.maxLength = '10';
 
+    let regexp = /[A-Za-zA-Яа-яЁё]/g;
+    
+    defQuantityInput.oninput = function() {
+        this.value = this.value.replace(regexp, '');
+    }
+
     let defApply = document.createElement('button');
     defApply.classList.add('defApply');
     defWrap.appendChild(defApply);
@@ -217,10 +223,12 @@ let training = function () {
                 alertText.innerText = '';
                 alertText.style.left = '37%';
                 alertText.style.top = '90%';
+                defApply.disabled = false;
                 setTimeout(() => {
                     alertText.remove();
                 }, 200)
             }, 2500);
+            defApply.disabled = true;
         }
         else if (LSArr != undefined && +defQuantityInput.value <= 1 && LSArr.length > 0) {
             errorSound.play();
@@ -236,10 +244,12 @@ let training = function () {
                 alertText.innerText = '';
                 alertText.style.left = '37%';
                 alertText.style.top = '90%';
+                defApply.disabled = false;
                 setTimeout(() => {
                     alertText.remove();
                 }, 200)
             }, 2500);
+            defApply.disabled = true;
             
         };
     })
@@ -412,7 +422,7 @@ let training = function () {
                     setTimeout(() => {
                         trainingFieldWrap.style.backgroundColor = 'white';
                         returnResults(mistakes);
-                    }, 2200);
+                    }, 2700);
                 }, 200)
             }
         }
@@ -584,7 +594,7 @@ let training = function () {
                     setTimeout(() => {
                         trainingFieldWrap.style.backgroundColor = 'white';
                         returnResults(mistakes);
-                    }, 2200);
+                    }, 2700);
                 }, 200)
             }
         }
@@ -762,7 +772,7 @@ let training = function () {
                     setTimeout(() => {
                         trainingFieldWrap.style.backgroundColor = 'white';
                         returnResults(mistakes);
-                    }, 2200);
+                    }, 2700);
                 }, 200)
             }
         }

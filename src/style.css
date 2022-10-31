@@ -52,8 +52,9 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding-top: 20px;
+    padding: 20 0;
     position: relative;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 .descrWrap {
@@ -131,10 +132,16 @@ body {
     overflow-y: scroll;
     padding: 10px;
     background-color: rgb(3, 0, 48);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.resultsWrapper{
+    margin-top: 0;
+    margin-bottom: 5%;
 }
 
 .vocabulary{
-    padding-top: 20px;
+    padding-top: 10px;
     margin-top: 5%;
 }
 
@@ -261,7 +268,7 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    top: 22.8%;
+    top: 20.8%;
     z-index: 1;
     
 }
@@ -293,6 +300,7 @@ body {
     align-items: center;
     transition: 0.3s all;
     border: none;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 .alert{
@@ -322,6 +330,7 @@ body {
     flex-direction: column;
     font-size: large;
     height: 43%;
+    margin-top: 2%;
     font-weight: 900;
 }
 
@@ -630,13 +639,21 @@ body {
         font-size: small;
     }
 
+    .defDescr{
+        position: relative;
+        padding-top: 1%;
+    }
+    .defDescrHeader{
+        position: absolute;
+        top: 0;
+    }
 }
 
 @media (max-width: 815px) {
     .wrap {
-        width: 85vw;
-        height: 90vh;
-        margin-top: 30px;
+        width: 90vw;
+        height: 95vh;
+        margin: 10px;
     }
 
     .addWord {
@@ -655,158 +672,78 @@ body {
     }
 
     .defApply{
-        height: 70px;
-        width: 70px;
+        height: 50px;
+        width: 150px;
+    }
+
+    .trainingFieldWrap{
+        width: 80%;
+        margin-top: 0;
     }
 }
 
 @media (max-width: 601px){
+    .wrap{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
 .defWordInputs {
         left: 55%;
-        width: 152px;
+        width: 210px;
     }
 
     .defApply {
         height: 60px;
-        width: 60px;
+        width: 120px;
+    }
+
+    .defWrap{
+        width: 95%;
+        height: 96%;
+        margin: 0;
     }
 }
 
 @media (max-width: 426px) {
-    body {
-        background-color: black;
-    }
 
     .wrap {
         position: relative;
-        width: 85vw;
-        height: 85vh;
-        margin-top: 15px;
-        flex-direction: column;
-        border: none;
-    }
-
-    .backToPrevious {
-        width: 7.5%;
-        left: 91.5%;
-        height: 3%;
-    }
-
-    .vocabulary,
-    .trainingFieldWrap {
-        width: 91%;
-        height: 79%;
-        margin-top: 30%;
-    }
-
-    .wordNum {
-        position: absolute;
-        top: 11.7%;
-        right: 41%;
-        width: 15%;
-        z-index: 1;
-    }
-
-    .del {
-        width: 20px;
-        height: 20px;
-        border-radius: 100%;
-    }
-
-    .rmvImg {
-        width: 10px;
-        height: 15px;
-    }
-
-    .wordsWrapper,
-    .defWrap {
-        position: absolute;
-        top: 0.3%;
-        left: 1%;
-        margin: 0 auto;
-        border-radius: 19px 0 19px 19px;
-        width: 87.5%;
-        height: 70px;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        background-color: rgb(255, 255, 255);
-        border: 2px solid;
-        border-left-color: rgb(0, 128, 85);
-        border-top-color: rgb(64, 61, 255);
-        border-right-color: rgb(255, 0, 98);
-        border-bottom-color: rgb(64, 61, 255);
-    }
-
-    .addWord {
-        font-size: xx-small;
-    }
-
-    .wordEng,
-    .dash,
-    .wordTranslate {
-        font-size: x-small;
-    }
-
-    .wordsWrapper input {
-        font-size: x-small;
-        border-radius: 15px 15px 15px 15px;
-    }
-
-    .addWord{
-        width: 50px; 
-        height: 50px;
-        border-radius: 100%;
-    }
-
-    .defWordText,
-    .defQuantityText{
-        font-size: xx-small;
-    }
-
-    .defWordInputs{
-        width: 100px;
-        font-size: x-small;
-        left: 66%;
-    }
-    .defWordEng,
-    .defWordTranslate{
-        width: 45px;
-    }
-
-    .question{
-        width: 60%;
-    }
-
-    .answerInput{
-        width: 84%;
-    }
-
-    .trainingFieldWrap {
-        width: 91%;
-        height: 79%;
-        margin-top: 25%;
+        width: 88vw;
+        height: 99vh;
+        padding-top: none;
+        padding-top: 0;
     }
 
     .defWrap{
-        height: 80px;
+        height: 100%;
+        width: 101%;
+        justify-content: space-around;
     }
 
-}
-
-@media (max-width: 419px) {
-    .defWordInputs {
-        left: 58%;
-        width: 100px;
+    .defDescr{
+        display: none;
     }
 
-    .defApply {
-        height: 40px;
-        width: 40px;
-        font-size: xx-small;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .backToPrevious{
+        width: 12.5%;
+        left: 86.5%;
+        height: 3%;
+    }
+
+    .defWordWrap,
+    .defQuantityWrap{
+        height: 10%;
+    }
+
+    .defWordInputs{
+        width: 149px;
+    }
+
+    .defApply{
+        height: 97px;
+        width: 152px;
     }
 }
 
